@@ -35,13 +35,19 @@ public class Stock {
     }
     
     public void decreaseStock(Music music) {
+        decreaseStock(music, 1);
+    }
+    
+    public void decreaseStock(Music music, int amount) {
         int musicIndex = indexOf(music);
         if(musicIndex == NO_INDEX){
             return;
         } else if(stock[musicIndex] == 0){
             return;
+        } else if(stock[musicIndex]<amount){
+            throw new IllegalArgumentException("You greedy bastard.");
         } else {
-            stock[musicIndex] -= 1;
-        }       
+            stock[musicIndex] -= amount;
+        }
     }
 }

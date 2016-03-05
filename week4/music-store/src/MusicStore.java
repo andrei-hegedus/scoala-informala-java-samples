@@ -8,6 +8,12 @@ public class MusicStore {
         if(inventoryCount == 100){
             throw new IllegalStateException("Inventory is full");
         }
+        for(int i = 0; i<inventoryCount; i++) {
+            if(inventory[i].equals(music)) {
+                this.stock.addToStock(music, stock);
+                return;
+            }
+        }
         inventory[inventoryCount++] = music;
         this.stock.addToStock(music, stock);
         // TODO - implement price catalog
@@ -23,7 +29,11 @@ public class MusicStore {
     }
     
     public void purchase(Music music){
-        stock.decreaseStock(music);
+        purchase(music, 1);
+    }
+    
+    public void purchase(Music music, int amount) {
+        stock.decreaseStock(music, amount);
     }
     
 }
