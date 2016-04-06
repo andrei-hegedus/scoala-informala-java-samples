@@ -6,6 +6,7 @@ public class MusicStoreApp {
         float basePrice = 9.99f; // add currency in future.
         int stock = 15;
         musicStore.addMusic(imMusic, basePrice, stock);
+        musicStore.listMusic();
         musicStore.addMusic(imMusic, basePrice, stock);
         musicStore.listMusic();
         System.out.println("Purchase: "+imMusic);
