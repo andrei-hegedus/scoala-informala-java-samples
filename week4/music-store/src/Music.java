@@ -1,9 +1,19 @@
-public class Music {
+import java.util.Comparator;
+
+public class Music implements Comparable<Music>{
     private String artist;
     private String title;
     private int year;
     private Genre genre;
     private Format format;
+    
+    public static final Comparator<Music> COMPARATOR_BY_ARTIST = new Comparator<Music>() {
+		
+		@Override
+		public int compare(Music o1, Music o2) {
+			return o1.artist.compareTo(o2.artist);
+		}
+	};
     
     public Music(String artist, String title, int year, Genre genre, Format format){
         this.artist = artist;
@@ -82,4 +92,9 @@ public class Music {
     public enum Genre {
         METAL, ROCK, POP, BLUES, RAP, DISCO;
     }
+
+	@Override
+	public int compareTo(Music o) {
+		return this.title.compareTo(o.title);
+	}
 }

@@ -28,11 +28,14 @@ public class MusicStore {
         }
     }
     
-    public void purchase(Music music){
+    public void purchase(Music music) throws NotEnoughStockException{
         purchase(music, 1);
     }
     
-    public void purchase(Music music, int amount) {
+    public void purchase(Music music, int amount) throws NotEnoughStockException {
+    	if(amount > stock.getStock(music)){
+    		throw new NotEnoughStockException();
+    	}
         stock.decreaseStock(music, amount);
     }
     
