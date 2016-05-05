@@ -12,7 +12,7 @@ public class User {
 		this.name = name;
 	}
 
-	public Object getName() {
+	public String getName() {
 		return name;
 	}
 

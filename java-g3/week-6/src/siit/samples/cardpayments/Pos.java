@@ -11,8 +11,10 @@ public class Pos {
 	}
 
 	public Receipt pay(float fee, Card card) throws InsufficientFundsException, BankAccountNotFoundException {
+		// iterate over all bank accounts and find out whether the Card is attached to an existing account.
 		for(BankAccount bankAccount : bankAccounts){
 			if(bankAccount.getIban().equals(card.getIban())){
+				// once we find the account that the card is attached to, we need to check whether there is enough money for the transaction.
 				if(bankAccount.getBalance() >= fee){
 					bankAccount.withdraw(fee);
 					return new Receipt(fee);
