@@ -1,4 +1,4 @@
-package siit.java3.exepnsereports;
+package siit.java3.expensereports;
 
 import java.io.File;
 import java.io.FileWriter;
