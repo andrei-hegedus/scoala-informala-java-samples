@@ -16,7 +16,7 @@ public class CSVExpenseRepository implements ExpenseRepository {
 	protected CSVExpenseFormater csvFormater = new CSVExpenseFormater();
 
 	@Override
-	public void save(Expense expense) throws IOException {
+	public synchronized void save(Expense expense) throws IOException {
 		File file = new File(CSV_FILE_NAME);
 		try (FileWriter writer = new FileWriter(file, true)) {
 			writer.append(csvFormater.toCSV(expense) + "\n");
@@ -24,15 +24,17 @@ public class CSVExpenseRepository implements ExpenseRepository {
 	}
 
 	@Override
-	public List<Expense> loadAll() throws FileNotFoundException, IOException, ParseException {
+	public synchronized List<Expense> loadAll() throws FileNotFoundException, IOException, ParseException {
 		File file = new File(CSV_FILE_NAME);
 		ArrayList<Expense> expenses = new ArrayList<>();
-		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-			String line = reader.readLine();
-			while(line!=null){
-				Expense e = csvFormater.fromCSV(line);
-				expenses.add(e);
-				line = reader.readLine();
+		if (file.exists()) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+				String line = reader.readLine();
+				while (line != null) {
+					Expense e = csvFormater.fromCSV(line);
+					expenses.add(e);
+					line = reader.readLine();
+				}
 			}
 		}
 		return expenses;
