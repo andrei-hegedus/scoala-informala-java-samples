@@ -16,8 +16,8 @@ public class Main {
 
 		private String name;
 		private String[] phrases;
-		private ToChannel toChannel;
-		private FromChannel fromChannel;
+		private MessageSender sender;
+		private MessageReceiver receiver;
 		private boolean conversationStarter = false;
 
 		public Friend(String name, String[] phrases) {
@@ -28,8 +28,8 @@ public class Main {
 		public void talkTo(Friend bianca) {
 			conversationStarter = true;
 			MessagingChannel channel = new MessagingChannel();
-			toChannel = channel;
-			fromChannel = bianca.contactFriend(channel);
+			sender = channel;
+			receiver = bianca.contactFriend(channel);
 			startThread();
 		}
 
@@ -42,7 +42,7 @@ public class Main {
 							long sleepTime = (long) (1000 + r.nextInt(2000));
 							Thread.sleep(sleepTime);
 							if (!conversationStarter) {
-								String received = fromChannel.obtainMessage();
+								String received = receiver.obtainMessage();
 								if (received != null) {
 									System.out.println(received);
 								}
@@ -50,7 +50,7 @@ public class Main {
 								conversationStarter = false;
 							}
 							String message = name + ": " + phrases[r.nextInt(phrases.length)];
-							toChannel.sendMessage(message);
+							sender.sendMessage(message);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -59,48 +59,16 @@ public class Main {
 			}.start();
 		}
 
-		private FromChannel contactFriend(FromChannel fromChannel) {
-			this.fromChannel = fromChannel;
+		private MessageReceiver contactFriend(MessageReceiver fromChannel) {
+			this.receiver = fromChannel;
 			startThread();
 			MessagingChannel channel = new MessagingChannel();
-			toChannel = channel;
+			sender = channel;
 			return channel;
 		}
 
 	}
 	
-	public interface ToChannel {
-		void sendMessage(String message) throws Exception;
-	}
 	
-	public interface FromChannel {
-		String obtainMessage() throws Exception;
-	}
-
-	private static class MessagingChannel implements ToChannel, FromChannel {
-
-		private String message = null;
-
-		@Override
-		public synchronized void sendMessage(String message) throws InterruptedException {
-			while (this.message != null) {
-				wait();
-			}
-			this.message = message;
-			notifyAll();
-		}
-
-		@Override
-		public synchronized String obtainMessage() throws InterruptedException {
-			while (message == null) {
-				wait();
-			}
-			String msg = message;
-			message = null;
-			notifyAll();
-			return msg;
-		}
-
-	}
 
 }
