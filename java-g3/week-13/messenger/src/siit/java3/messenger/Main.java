@@ -1,4 +1,4 @@
-package messenger;
+package siit.java3.messenger;
 
 import java.util.Random;
 
