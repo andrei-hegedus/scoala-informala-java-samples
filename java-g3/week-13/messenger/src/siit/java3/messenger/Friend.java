@@ -10,7 +10,7 @@ public class Friend {
 	private MessageReceiver receiver;
 	private boolean isConversationStarter = false;
 
-	public Friend(String name, String[] phrases) {
+	public Friend(String name, String...phrases) {
 		this.name = name;
 		this.phrases = phrases;
 	}
