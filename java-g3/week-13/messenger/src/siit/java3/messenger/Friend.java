@@ -20,41 +20,55 @@ public class Friend {
 		MessagingChannel channel = new MessagingChannel();
 		sender = channel;
 		receiver = bianca.contactFriend(channel);
-		startThread();
+		new ConversationThread().start();
 	}
 
-	private void startThread() {
-		new Thread() {
-			public void run() {
-				try {
-					Random r = new Random();
-					while (true) {
-						long sleepTime = (long) (1000 + r.nextInt(2000));
-						Thread.sleep(sleepTime);
-						if (!isConversationStarter) {
-							String received = receiver.obtainMessage();
-							if (received != null) {
-								System.out.println(received);
-							}
-						} else {
-							isConversationStarter = false;
-						}
-						String message = name + ": " + phrases[r.nextInt(phrases.length)];
-						sender.sendMessage(message);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			};
-		}.start();
-	}
 
 	private MessageReceiver contactFriend(MessageReceiver fromChannel) {
 		this.receiver = fromChannel;
-		startThread();
+		new ConversationThread().start();
 		MessagingChannel channel = new MessagingChannel();
 		sender = channel;
 		return channel;
+	}
+	
+	private class ConversationThread extends Thread {
+		private Random random = new Random();
+		
+		@Override
+		public void run() {
+			try {
+				while (true) {
+					simulateThinking();
+					readMessage();
+					writeMessage();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		private void simulateThinking() throws InterruptedException {
+			long sleepTime = (long) (1000 + random.nextInt(2000));
+			Thread.sleep(sleepTime);
+		}
+
+		private void writeMessage() throws Exception {
+			String message = name + ": " + phrases[random.nextInt(phrases.length)];
+			sender.sendMessage(message);
+		}
+
+		private void readMessage() throws Exception {
+			if (!isConversationStarter) {
+				String received = receiver.obtainMessage();
+				if (received != null) {
+					System.out.println(received);
+				}
+			} else {
+				isConversationStarter = false;
+			}
+		}
+		
 	}
 
 }
