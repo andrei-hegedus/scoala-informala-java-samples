@@ -6,7 +6,7 @@ import org.junit.Assert;
 public class WeightConverterTest {
 	
 	@Test
-	public void gramsToKilogramsConvertion(){
+	public void gramsToKilogramsConvertion() throws UnknownWeightFormatException{
 		Weight g1000 = new Weight(Weight.GRAMS, 1000);
 		MetricWeightConverter weightConverter = new MetricWeightConverter();
 		
@@ -17,7 +17,7 @@ public class WeightConverterTest {
 	}
 	
 	@Test
-	public void kilogramsToGramsConvertion(){
+	public void kilogramsToGramsConvertion() throws UnknownWeightFormatException{
 		Weight kg1 = new Weight(Weight.KILO_GRAMS, 1);
 		MetricWeightConverter weightConverter = new MetricWeightConverter();
 		
@@ -26,5 +26,13 @@ public class WeightConverterTest {
 		
 		Assert.assertEquals("Convertion from kgs to gs is incorrect.", expected,  result);
 	}
+	
+	@Test(expected=UnknownWeightFormatException.class)
+	public void convertionFailsWhenUnknownFormatIsPassed() throws UnknownWeightFormatException{
+		Weight kg1 = new Weight(Weight.KILO_GRAMS, 1);
+		MetricWeightConverter weightConverter = new MetricWeightConverter();
+		weightConverter.convert(kg1, "dkg");
+	}
+	
 
 }

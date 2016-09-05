@@ -4,7 +4,7 @@ public class MetricWeightCalculator {
 	
 	private MetricWeightExpressionParser parser = new MetricWeightExpressionParser();
 	
-	public Weight computeWeight(String expression, String resultWeightFormat){
+	public Weight computeWeight(String expression, String resultWeightFormat) throws UnknownWeightFormatException{
 		Weight[] weights = parser.parse(expression);
 		Weight result = new Weight(resultWeightFormat, 0);
 		MetricWeightConverter converter = new MetricWeightConverter();
