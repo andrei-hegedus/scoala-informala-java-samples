@@ -10,6 +10,7 @@ public class MetricWeightConverter {
 		new Convertion(Weight.POUNDS, Weight.GRAMS, 453.59),
 		new Convertion(Weight.GRAMS, Weight.POUNDS, 0.0022),
 	};
+
 	
 	public Weight convert(Weight weight, String toFormat) throws UnknownWeightFormatException{
 		if(weight.getFormatName().equals(toFormat)){

@@ -7,9 +7,15 @@ public class MetricWeightExpressionParserTest {
 
 	@Test
 	public void nextOperatorTest1() {
+		// given
 		MetricWeightExpressionParser parser = new MetricWeightExpressionParser();
 		String s = "123-";
-		assertEquals(3, parser.nextOperatorPos(s));
+		
+		// when
+		int opPos = parser.nextOperatorPos(s);
+		
+		//then
+		assertEquals(3, opPos);
 	}
 
 	@Test
