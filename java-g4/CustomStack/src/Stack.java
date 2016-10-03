@@ -1,8 +1,8 @@
 
-public interface Stack {
+public interface Stack<T> {
 
-	void push(Object obj);
-	Object pop();
-	Object peek();
+	void push(T obj);
+	T pop();
+	T peek();
 	
 }

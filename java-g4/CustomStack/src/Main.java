@@ -3,7 +3,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Stack stack = new PointerStack();
+		Stack<String> stack = new PointerStack<String>();
 		stack.push("apple");
 		stack.push("lemon");
 		System.out.println(stack.peek());
@@ -12,7 +12,7 @@ public class Main {
 		System.out.println(stack.pop());
 		System.out.println(stack.pop());
 		System.out.println(stack.pop());
-		
+		Stack<Integer> istack;		
 	}
 
 }

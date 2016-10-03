@@ -1,49 +1,49 @@
 
-public class PointerStack implements Stack{
+public class PointerStack<T> implements Stack<T>{
 	
-	private StackElement top = null;
+	private StackElement<T> top = null;
 
 	@Override
-	public void push(Object obj) {
+	public void push(T obj) {
 		if(top==null){
-			top = new StackElement(obj, null);
+			top = new StackElement<T>(obj, null);
 		} else {
-			StackElement newTop = new StackElement(obj, top);
+			StackElement<T> newTop = new StackElement<T>(obj, top);
 			top = newTop;
 		}
 	}
 
 	@Override
-	public Object pop() {
+	public T pop() {
 		if(top==null){
 			return null;
 		} else {
-			Object value = top.getValue();
+			T value = top.getValue();
 			top = top.getPrevious();
 			return value;
 		}
 	}
 
 	@Override
-	public Object peek() {
-		return top ==null ? null : top.getValue();
+	public T peek() {
+		return top ==null ? null : (T)top.getValue();
 	}
 	
-	private class StackElement {
-		private Object value;
-		private StackElement previous;
+	private class StackElement<S> {
+		private S value;
+		private StackElement<S> previous;
 		
-		public StackElement(Object value, StackElement previous) {
+		public StackElement(S value, StackElement<S> previous) {
 			super();
 			this.value = value;
 			this.previous = previous;
 		}
 		
-		public StackElement getPrevious() {
+		public StackElement<S> getPrevious() {
 			return previous;
 		}
 		
-		public Object getValue() {
+		public S getValue() {
 			return value;
 		}
 		
