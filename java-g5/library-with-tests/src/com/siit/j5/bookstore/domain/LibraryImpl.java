@@ -26,7 +26,7 @@ public class LibraryImpl implements Library{
 
 	@Override
 	public List<Book> showAllBooks() {
-		return null;
+		return libraryRepository.getAllBooks();
 	}
 
 	@Override
@@ -43,7 +43,8 @@ public class LibraryImpl implements Library{
 
 	@Override
 	public void lend(Book book, Client client) {
-		
+		libraryRepository.lendBookToClient(book, client);
+		book.setAvailable(false);
 	}
 	
 	

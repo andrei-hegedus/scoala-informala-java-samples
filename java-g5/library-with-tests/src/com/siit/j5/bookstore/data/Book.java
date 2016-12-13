@@ -4,6 +4,7 @@ public class Book {
 	
 	private String title;
 	private String author;
+	private boolean available = true;
 	
 	public Book(String title, String author) {
 		super();
@@ -17,6 +18,14 @@ public class Book {
 	
 	public String getTitle() {
 		return title;
+	}
+	
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+	public boolean isAvailable() {
+		return available;
 	}
 
 }
