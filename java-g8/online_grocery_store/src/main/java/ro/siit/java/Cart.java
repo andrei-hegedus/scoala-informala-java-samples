@@ -1,9 +1,6 @@
 package ro.siit.java;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by andrei on 9/4/17.

@@ -5,6 +5,8 @@ import ro.siit.java.Client;
 import ro.siit.java.Product;
 import ro.siit.java.Store;
 
+import java.util.PriorityQueue;
+
 /**
  * Created by andrei on 9/4/17.
  */
@@ -22,6 +24,8 @@ public class Main {
 
         Product[] products = store.getProducts();
         Cart cart = store.addToCart(c, products[1]);
+
+
 
     }
 }

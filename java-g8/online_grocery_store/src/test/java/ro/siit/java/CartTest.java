@@ -85,7 +85,7 @@ public class CartTest {
         assertEquals(p, products.get(0));
     }
 
-    
+
     @Test
     public void whenProductRemovedFromCart_cartContainsCorrectCount(){
         // given
