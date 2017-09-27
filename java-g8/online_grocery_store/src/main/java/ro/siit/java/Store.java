@@ -1,59 +1,56 @@
 package ro.siit.java;
 
+import java.util.*;
+
 /**
  * Created by andrei on 9/4/17.
  */
 public class Store {
 
-    private static int userIdCounter = 1;
-    private Client [] clients;
-    private Product [] products;
-    private int [] stock;
-    private Cart [] carts;
+    private final HashSet<Client> clients = new LinkedHashSet<>();
+    private final HashSet<Product> products = new LinkedHashSet<Product>();
+    private final HashMap<Product, Integer> stock = new LinkedHashMap<>();
+    private final HashMap<Client, Cart> shoppingCarts = new LinkedHashMap<Client, Cart>();
 
-    public void registerClient(Client c){
-        c.setUserId(getNewUserID());
+    public void registerClient(Client c) {
+        clients.add(c);
     }
 
-    private String getNewUserID(){
-        return "uid_"+userIdCounter++;
-    }
-
-    public Product[] getProducts(){
-        int nrOfproductsInStock = getNrOfproductsInStock();
-        Product [] productsInStock = new Product[nrOfproductsInStock];
-        int productsInStockIndex = 0;
-        for(int i =0;i<stock.length;i++){
-            if(stock[i]>0){
-                productsInStock[productsInStockIndex] = products[i];
-                productsInStockIndex++;
+    public Set<Product> getProducts() {
+        HashSet<Product> productsInStock = new HashSet<Product>();
+        for (Product p : products) {
+            if (stock.containsKey(p) && stock.get(p) > 0) {
+                productsInStock.add(p);
             }
         }
         return productsInStock;
     }
 
-    private int getNrOfproductsInStock() {
-        int nrOfproductsInStock = 0;
-        for(int s : stock){
-            if(s>0){
-                nrOfproductsInStock++;
-            }
-        }
-        return nrOfproductsInStock;
+
+    public void addNewProductToStore(Product p, int stock) {
+        products.add(p);
+        this.stock.put(p, stock);
     }
 
-
     public Cart addToCart(Client client, Product product) {
-        Cart cart = null;
-        for(Cart c: carts){
-            if(c.getClient().equals(client)){
-                cart  = c;
-            }
-        }
-        if(cart == null){
+        Cart cart = shoppingCarts.get(client);
+        if (cart == null) {
             cart = new Cart(client);
-            // cart has to be added to this.carts
+            shoppingCarts.put(client, cart);
         }
-        return null;
+        cart.addProduct(product);
+        return cart;
+    }
+
+    public Map<Product, Integer> getProductWithStock(Comparator<Product> sorting){
+        /*TreeMap<Product, Integer> sortedProducts = new TreeMap<>(sorting);
+        sortedProducts.putAll(stock);*/
+        LinkedHashMap<Product, Integer> sortedProducts = new LinkedHashMap<>();
+        TreeSet<Product> products = new TreeSet<>(sorting);
+        products.addAll(this.products);
+        for(Product p : products){
+            sortedProducts.put(p, stock.get(p));
+        }
+        return sortedProducts;
     }
 }

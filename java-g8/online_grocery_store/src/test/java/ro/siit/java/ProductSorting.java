@@ -16,15 +16,9 @@ public class ProductSorting {
     @Test
     public void testAlphabeticalProductSorting(){
         ArrayList<Product> products = new ArrayList<Product>();
-        Product p1 = new Product();
-        p1.setName("Apple iPhone");
-        p1.setPrice(699);
-        Product p2 = new Product();
-        p2.setName("Samsung Washingmachine");
-        p2.setPrice(1300);
-        Product p3 = new Product();
-        p3.setName("LG Television");
-        p3.setPrice(150);
+        Product p1 = new Product("Apple iPhone", 699);
+        Product p2 = new Product("Samsung Washingmachine", 1300);
+        Product p3 = new Product("LG Television", 150);
 
         products.add(p2);
         products.add(p1);
@@ -47,15 +41,9 @@ public class ProductSorting {
     @Test
     public void testAlphabeticalProductSortingInDescendingOrder(){
         ArrayList<Product> products = new ArrayList<Product>();
-        Product p1 = new Product();
-        p1.setName("Apple iPhone");
-        p1.setPrice(699);
-        Product p2 = new Product();
-        p2.setName("Samsung Washingmachine");
-        p2.setPrice(1300);
-        Product p3 = new Product();
-        p3.setName("LG Television");
-        p3.setPrice(150);
+        Product p1 = new Product("Apple iPhone", 699);
+        Product p2 = new Product("Samsung Washingmachine", 1300);
+        Product p3 = new Product("LG Television", 150);
 
         products.add(p2);
         products.add(p1);
@@ -82,15 +70,9 @@ public class ProductSorting {
     @Test
     public void testProductSortingByPrice(){
         ArrayList<Product> products = new ArrayList<Product>();
-        Product p1 = new Product();
-        p1.setName("Apple iPhone");
-        p1.setPrice(699);
-        Product p2 = new Product();
-        p2.setName("Samsung Washingmachine");
-        p2.setPrice(1300);
-        Product p3 = new Product();
-        p3.setName("LG Television");
-        p3.setPrice(150);
+        Product p1 = new Product("Apple iPhone", 699);
+        Product p2 = new Product("Samsung Washingmachine", 1300);
+        Product p3 = new Product("LG Television", 150);
 
         products.add(p2);
         products.add(p1);

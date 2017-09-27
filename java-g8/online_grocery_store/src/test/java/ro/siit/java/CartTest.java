@@ -15,9 +15,7 @@ public class CartTest {
     @Test
     public void whenProductAddedToEmptyCart_cartContainsOnlyThatProduct(){
         // given
-        Product p = new Product();
-        p.setName("iPhone");
-        p.setPrice(699);
+        Product p = new Product("iPhone", 699);
         Cart c = new Cart(new Client());
         // when
         c.addProduct(p);
@@ -31,9 +29,7 @@ public class CartTest {
     @Test
     public void whenRemovingProductFromOneItemCart_cartRemainsEmpty(){
         // given
-        Product p = new Product();
-        p.setName("iPhone");
-        p.setPrice(699);
+        Product p = new Product("iPhone", 699);
         Cart c = new Cart(new Client());
         c.addProduct(p);
         // when
@@ -46,13 +42,9 @@ public class CartTest {
     @Test
     public void whenProductAddedSecondTimeToCart_cartContainsThatProductCount(){
         // given
-        Product p = new Product();
-        p.setName("iPhone");
-        p.setPrice(699);
+        Product p = new Product("iPhone", 699);
 
-        Product p2 = new Product();
-        p2.setName("iPhone");
-        p2.setPrice(699);
+        Product p2 = new Product("iPhone", 699);
 
         Cart c = new Cart(new Client());
         // when
@@ -66,13 +58,9 @@ public class CartTest {
     @Test
     public void whenProductAddedMultipleTimesToCart_cartContainsThatProductOnlyOnce(){
         // given
-        Product p = new Product();
-        p.setName("iPhone");
-        p.setPrice(699);
+        Product p = new Product("iPhone", 699);
 
-        Product p2 = new Product();
-        p2.setName("iPhone");
-        p2.setPrice(699);
+        Product p2 = new Product("iPhone", 699);
 
         Cart c = new Cart(new Client());
         // when
@@ -89,13 +77,9 @@ public class CartTest {
     @Test
     public void whenProductRemovedFromCart_cartContainsCorrectCount(){
         // given
-        Product p = new Product();
-        p.setName("iPhone");
-        p.setPrice(699);
+        Product p = new Product("iPhone", 699);
 
-        Product p2 = new Product();
-        p2.setName("iPhone");
-        p2.setPrice(699);
+        Product p2 = new Product("iPhone", 699);
 
         Cart c = new Cart(new Client());
         // when
